@@ -11,9 +11,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v1
         with:
-          path: '/home'
+          path: '/home/Repo'
       - name: Setup envs
         run: |
-          cd /home/G6
+          cd /home/Repo/G6
           git pull origin master
 
