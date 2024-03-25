@@ -5,10 +5,15 @@ on:
     branches:
       - 'master'
 jobs:
-  Explore-GitHub-Actions:
+  GitHub-Actions:
     runs-on: self-hosted
     steps: 
-      - uses: actions/checkout@v1
-      - name: setup envs
+      - name: Checkout repository
+        uses: actions/checkout@v1
+        with:
+          path: '/home'
+      - name: Setup envs
         run: |
+          cd /home/G6
           git pull origin master
+
