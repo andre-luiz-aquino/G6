@@ -20,8 +20,8 @@ jobs:
         run: |
           cd /home/g6bank/actions-runner/_work/G6/G6
           dotnet build
-      - name: Run project
-        run: |
-          cd /home/g6bank/actions-runner/_work/G6/G6/G6.Api/bin/Debug/net8.0
-          dotnet G6.Api.dll
+      # - name: Run project
+      #   run: |
+      #     cd /home/g6bank/actions-runner/_work/G6/G6/G6.Api/bin/Debug/net8.0
+      #     dotnet G6.Api.dll
 
