@@ -11,7 +11,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          path: '/actions-runner/_work/G6'
+          path: '/actions-runner/_work/G6/G6'
       - name: Setup envs
         run: |
           cd /actions-runner/_work/G6/G6
