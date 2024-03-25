@@ -18,7 +18,6 @@ jobs:
           git pull origin master
       - name: Build project
         run: |
-          sudo su
           cd /actions-runner/_work/G6/G6
           dotnet build
       - name: Run project
