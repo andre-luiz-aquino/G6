@@ -16,4 +16,11 @@ jobs:
         run: |
           cd /actions-runner/_work/G6/G6
           git pull origin master
-
+      - name: Build project
+        run: |
+          cd /actions-runner/_work/G6/G6
+          dotnet build
+      - name: Run project
+        run: |
+          cd /actions-runner/_work/G6/G6
+          dotnet run
