@@ -1,0 +1,14 @@
+name: Andre Actions
+run-name: ${{ github.actor }} GitHub Actions 
+on:
+  push:
+    branches:
+      - 'master'
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: self-hosted
+    steps: 
+      - uses: actions/checkout@v1
+      - name: setup envs
+        run: |
+          git pull origin master
