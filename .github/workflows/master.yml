@@ -4,25 +4,31 @@ on:
   push:
     branches:
       - 'master'
+
 jobs:
-  GitHub-Actions:
+  Build:
     runs-on: self-hosted
     steps: 
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           path: '/home/g6bank/actions-runner/_work/G6/G6'
+
       - name: Setup envs
         run: |
           cd /home/g6bank/actions-runner/_work/G6/G6
           git pull origin master
+
       - name: Build project
         run: |
           cd /home/g6bank/actions-runner/_work/G6/G6
           dotnet build
+
+  Deploy:
+    runs-on: self-hosted
+    needs: [Build]  # Garante que a tarefa de compilação seja concluída antes de iniciar a implantação
+    steps:
       - name: Run project
         run: |
-           cd /home/g6bank/actions-runner/_work/G6/G6/G6.Api/bin/Debug/net8.0
-           pm2 restart meuAppDotNet
-
-
+          cd /home/g6bank/actions-runner/_work/G6/G6/G6.Api/bin/Debug/net8.0
+          pm2 restart meuAppDotNet
