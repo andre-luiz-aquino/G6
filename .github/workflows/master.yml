@@ -6,7 +6,7 @@ on:
       - 'master'
 
 jobs:
-  Build:
+  ClonagemRepo:
     runs-on: self-hosted
     steps: 
       - name: Checkout repository
@@ -14,6 +14,26 @@ jobs:
         with:
           path: '/home/g6bank/actions-runner/_work/G6/G6'
 
+  CheckDotnet:
+    runs-on: self-hosted
+    needs: [ClonagemRepo]
+    steps:
+      - name: Check .NET Core SDK
+        run: |
+          cd /home/g6bank
+          if ! command -v dotnet &> /dev/null
+          then
+              echo ".NET Core SDK is not installed. Installing..."
+              ./dotnet-install.sh --channel 8.0
+              source ~/.bashrc
+          else
+              echo ".NET Core SDK is installed."
+          fi
+
+  Build:
+    runs-on: self-hosted
+    needs: [ClonagemRepo, CheckDotnet]
+    steps: 
       - name: Setup envs
         run: |
           cd /home/g6bank/actions-runner/_work/G6/G6
@@ -26,7 +46,7 @@ jobs:
 
   Deploy:
     runs-on: self-hosted
-    needs: [Build]  # Garante que a tarefa de compilação seja concluída antes de iniciar a implantação
+    needs: [Build]
     steps:
       - name: Run project
         run: |
