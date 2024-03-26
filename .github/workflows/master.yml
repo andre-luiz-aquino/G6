@@ -48,8 +48,14 @@ jobs:
       run: |
         cd /home/g6bank/actions-runner/_work/G6/G6
         git config --global credential.helper "store --file=.git/credentials"
-        echo "https://github.com/${{ github.repository }}:${GIT_TOKEN}" > ~/.git/credentials
+        echo "https://github.com/andre-luiz-aquino/G6:${GIT_TOKEN}" > .git/credentials
         git pull origin master
+
+    - name: Build project
+      run: |
+        cd /home/g6bank/actions-runner/_work/G6/G6
+        dotnet build
+
 
     - name: Build project
       run: |
