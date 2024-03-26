@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} GitHub Actions
 on:
   push:
     branches:
-      - 'master'
+       - 'master'
 
 jobs:
   ClonagemRepo:
