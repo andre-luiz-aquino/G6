@@ -6,8 +6,17 @@ on:
        - 'master'
 
 jobs:
+  CheckConnection:
+    runs-on: self-hosted
+    steps:
+      - name: Check Runner Connection
+        run: |
+          echo "Runner connection successful."
+          # Adicione aqui quaisquer verificações adicionais de conectividade que você deseja realizar
+
   ClonagemRepo:
     runs-on: self-hosted
+    needs: [CheckConnection]
     steps: 
       - name: Checkout repository
         uses: actions/checkout@v3
