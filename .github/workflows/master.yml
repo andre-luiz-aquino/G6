@@ -6,29 +6,84 @@ on:
       - 'master'
 
 jobs:
-  Build:
+  CheckConnection:
     runs-on: self-hosted
+    steps:
+      - name: Check Runner Connection
+        run: |
+          echo "Runner connection successful."
+          # Adicione aqui quaisquer verificações adicionais de conectividade que você deseja realizar
+
+  ClonagemRepo:
+    runs-on: self-hosted
+    needs: [CheckConnection]
     steps: 
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           path: '/home/g6bank/actions-runner/_work/G6/G6'
 
-      - name: Setup envs
+  CheckDotnet:
+    runs-on: self-hosted
+    needs: [ClonagemRepo]
+    steps:
+      - name: Check .NET Core SDK
         run: |
-          cd /home/g6bank/actions-runner/_work/G6/G6
-          git pull origin master
+          cd /home/g6bank
+          if ! command -v dotnet &> /dev/null; then
+              echo ".NET Core SDK is not installed. Installing..."
+              ./dotnet-install.sh --channel 8.0
+              source ~/.bashrc
+          else
+              echo ".NET Core SDK is installed."
+          fi
 
-      - name: Build project
-        run: |
-          cd /home/g6bank/actions-runner/_work/G6/G6
-          dotnet build
+  Build:
+    runs-on: self-hosted
+    needs: [ClonagemRepo, CheckDotnet]
+    steps: 
+    - name: Setup envs and pull changes
+      env:
+        GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+      run: |
+        cd /home/g6bank/actions-runner/_work/G6/G6
+        git config --global credential.helper "store --file=.git/credentials"
+        echo "https://github.com/andre-luiz-aquino/G6:${GIT_TOKEN}" > .git/credentials
+        git pull https://github.com/andre-luiz-aquino/G6.git master
+
+    - name: Build project
+      run: |
+        cd /home/g6bank/actions-runner/_work/G6/G6
+        dotnet build
+
+
+
+    - name: Build project
+      run: |
+        cd /home/g6bank/actions-runner/_work/G6/G6
+        dotnet build
+
 
   Deploy:
     runs-on: self-hosted
-    needs: [Build]  # Garante que a tarefa de compilação seja concluída antes de iniciar a implantação
+    needs: [Build]
     steps:
-      - name: Run project
+      - name: Check if application is running
+        id: check_app_status
+        run: |
+          if pm2 status meuAppDotNet &> /dev/null; then
+            echo "Application is running."
+            echo "::set-output name=app_running::true"
+          else
+            echo "Application is not running."
+            echo "::set-output name=app_running::false"
+          fi
+
+      - name: Restart or start application
         run: |
           cd /home/g6bank/actions-runner/_work/G6/G6/G6.Api/bin/Debug/net8.0
-          pm2 restart meuAppDotNet
+          if [[ "${{ steps.check_app_status.outputs.app_running }}" == 'true' ]]; then
+            pm2 restart MeuDotnet
+          else
+            pm2 start "dotnet G6.Api.dll" --name MeuDotnet
+          fi
