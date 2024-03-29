@@ -1,4 +1,5 @@
-﻿using System;
+﻿using G6.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -12,5 +13,12 @@ namespace G6.Application.DTOs
 
         [IgnoreDataMember]
         public int Id { get; set; }
+        public string? Currency { get; set; }
+        public string? LogoUrl { get; set; }
+        public string? Symbol { get; set; }
+        public decimal? averageDailyVolume3Month { get; set; }
+        public decimal? averageDailyVolume10Day { get; set; }
+        public string? longName { get; set; }
+        public ICollection<DadosHistoricosAtivosDTO>? DadosHistoricosAtivosDTO { get; set; }
     }
 }

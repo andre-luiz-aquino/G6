@@ -1,12 +1,13 @@
-﻿using System;
+﻿using G6.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace G6.Domain.Entities
+namespace G6.Application.DTOs
 {
-    public class DadosHistoricosAtivos
+    public class DadosHistoricosAtivosDTO
     {
         public int Id { get; set; }
         public string? Date { get; set; }
@@ -17,6 +18,6 @@ namespace G6.Domain.Entities
         public int? Volume { get; set; }
         public decimal? AdjustedClose { get; set; }
         public int AtivosId { get; set; }
-        public virtual Ativos? Ativos { get; set; }
+        public virtual Ativos? AtivosDTO { get; set; }
     }
 }

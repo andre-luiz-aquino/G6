@@ -24,6 +24,7 @@ namespace G6.Persistence.Context
             modelBuilder.ApplyConfiguration(new AtivosMapping());
             modelBuilder.ApplyConfiguration(new DadosHistoricosAtivosMapping());
             base.OnModelCreating(modelBuilder);
+            modelBuilder.HasDefaultSchema("Ativos");
         }
     }
 }
