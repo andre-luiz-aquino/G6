@@ -78,6 +78,7 @@ jobs:
             echo "::set-output name=app_running::false"
           fi
 
+
       - name: Restart or start application
         run: |
           cd /home/g6bank/actions-runner/_work/G6/G6/G6.Api/bin/Debug/net8.0
