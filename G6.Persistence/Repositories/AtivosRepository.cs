@@ -7,6 +7,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Npgsql;
+using System.Net.Http.Json;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+
+
 
 namespace G6.Persistence.Repositories
 {
@@ -114,11 +122,43 @@ namespace G6.Persistence.Repositories
         }
 
  
-        public async Task<List<String>> GetAtivoCodigos()
+        public async Task<List<string>> GetAtivoCodigos()
         {
             var codigos = await _context.Ativos.Select(a => a.Symbol).ToListAsync();
             return codigos;
         }
+
+        public async Task<ListaMelhoresAtivos> GetFuncaoMelhoresAtivos()
+        {
+            // String de conexão
+            var connectionString = _context.Database.GetConnectionString();
+
+            // Criar a conexão com o banco
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                // Abrir a conexão
+                await conn.OpenAsync();
+
+                // Criar o comando
+                using (var cmd = new NpgsqlCommand("SELECT \"Ativos\".calcular_media_movel_top10();", conn))
+                {
+                    // Executar o comando e capturar o resultado
+                    var result = await cmd.ExecuteScalarAsync();
+
+                    // Converter o resultado para string JSON
+                    string jsonResult = result.ToString();
+
+                    // Opcional: deserializar o JSON para uma lista de objetos ListaMelhoresAtivos
+
+                    var data = JsonConvert.DeserializeObject<ListaMelhoresAtivos>(jsonResult);
+
+                    // Retornar os dados deserializados
+                    return data;
+                }
+            }
+        }
+
+
 
     }
 }

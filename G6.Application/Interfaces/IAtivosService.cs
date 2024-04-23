@@ -1,4 +1,5 @@
 ﻿using G6.Application.ViewModels;
+using G6.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,7 @@ namespace G6.Application.Interfaces
         Task<IEnumerable<string>> AtivoQuoteList();
 
         Task AtualizarTodosAtivo(BrapiTickerRequestViewModelTodos requestVM);
+
+        Task<ListaMelhoresAtivos> GetFuncaoMelhoresAtivos();
     }
 }

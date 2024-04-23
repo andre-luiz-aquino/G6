@@ -16,5 +16,6 @@ namespace G6.Domain.Entities
         public decimal? averageDailyVolume10Day { get; set; }
         public string? longName { get; set; }
         public ICollection<DadosHistoricosAtivos>? DadosHistoricosAtivos { get; set; }
+
     }
 }

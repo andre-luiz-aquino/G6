@@ -27,7 +27,7 @@ namespace G6.Application.Services
             _dadosHistoricosRepository = dadosHistoricosRepository;
         }
 
-       
+
         public async Task AtivoQuoteTickers(BrapiTickerRequestViewModel requestVM)
         {
             var client = new RestClient("https://brapi.dev");
@@ -177,6 +177,16 @@ namespace G6.Application.Services
             }
 
 
+        }
+
+        public async Task<ListaMelhoresAtivos> GetFuncaoMelhoresAtivos()
+        {
+            var melhoresAtivos = await _repository.GetFuncaoMelhoresAtivos();
+            
+            if (melhoresAtivos is not null)
+                return melhoresAtivos;
+
+            return null;
         }
     }
 }

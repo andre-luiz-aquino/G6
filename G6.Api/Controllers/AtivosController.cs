@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using G6.Application.Interfaces;
 using G6.Application.ViewModels;
+using G6.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace G6.Api.Controllers
@@ -37,6 +38,12 @@ namespace G6.Api.Controllers
         {
             await _ativosService.AtualizarTodosAtivo(request);
             return Ok();
+        }
+        [HttpGet, Route("melhoresAtivos")]
+        public async Task<ActionResult<List<ListaMelhoresAtivos>>> BuscarMelhoresAtivos()
+        {
+            var melhoresAtivos = await _ativosService.GetFuncaoMelhoresAtivos();
+            return Ok(melhoresAtivos);
         }
 
     }
