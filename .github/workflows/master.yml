@@ -21,7 +21,6 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: '/home/g6bank/actions-runner/_work/G6/G6'
-
   CheckDotnet:
     runs-on: self-hosted
     needs: [ClonagemRepo]
