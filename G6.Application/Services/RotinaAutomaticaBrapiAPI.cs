@@ -25,7 +25,7 @@ namespace G6.Application.Services
         {
             while(!stoppingToken.IsCancellationRequested)
             {
-                if(DateTime.UtcNow.AddHours(-4).Hour == 20)
+                if(DateTime.UtcNow.AddHours(-3).Hour == 20)
                 {
                     var listaAcionamentoViewModel = new List<BrapiTickerRequestViewModel>();
                     var listaAtivos = new List<Ativos>();
