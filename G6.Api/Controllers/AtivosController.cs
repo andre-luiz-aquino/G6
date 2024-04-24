@@ -23,7 +23,7 @@ namespace G6.Api.Controllers
         [HttpPost]
         public async Task<ActionResult> RequestQuoteTickersBrapi([FromQuery] BrapiTickerRequestViewModel request)
         {
-            await _ativosService.AtivoQuoteTickers(request);
+            await _ativosService.AtivoQuoteTickers(request, false);
             return Ok();
         }
 

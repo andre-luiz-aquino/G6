@@ -31,8 +31,11 @@ builder.Services.AddScoped<IAtivosRepository, AtivosRepository>();
 builder.Services.AddScoped<IAtivosService, AtivosService>();
 builder.Services.AddScoped<IDadosHistoricosRepository, DadosHistoricosRepository>();
 
+builder.Services.AddHostedService<RotinaAutomaticaBrapiAPI>();
+
 // Registro do AutoMapper
 builder.Services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
+
 
 
 var app = builder.Build();

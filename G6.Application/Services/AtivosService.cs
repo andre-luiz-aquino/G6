@@ -28,7 +28,7 @@ namespace G6.Application.Services
         }
 
 
-        public async Task AtivoQuoteTickers(BrapiTickerRequestViewModel requestVM)
+        public async Task AtivoQuoteTickers(BrapiTickerRequestViewModel requestVM, bool interno = false)
         {
             var client = new RestClient("https://brapi.dev");
             var request = new RestRequest($"/api/quote/{requestVM.Ativo}?range={requestVM.Range}&interval={requestVM.Interval}", Method.Get);
@@ -45,21 +45,24 @@ namespace G6.Application.Services
 
             var list = new List<Ativos>() { ativoDB };
 
-            var updateAtivo = from dados in responseObject.results
-                              join ativo in list on dados.Symbol equals ativo.Symbol
-                              select new Ativos
-                              {
-                                  Currency = dados.Currency,
-                                  LogoUrl = dados.LogoUrl,
-                                  Symbol = ativo.Symbol,
-                                  averageDailyVolume3Month = dados.averageDailyVolume3Month,
-                                  averageDailyVolume10Day = dados.averageDailyVolume10Day,
-                                  longName = dados.longName
-                              };
+            if (!interno)
+            {
+                var updateAtivo = from dados in responseObject.results
+                                  join ativo in list on dados.Symbol equals ativo.Symbol
+                                  select new Ativos
+                                  {
+                                      Currency = dados.Currency,
+                                      LogoUrl = dados.LogoUrl,
+                                      Symbol = ativo.Symbol,
+                                      averageDailyVolume3Month = dados.averageDailyVolume3Month,
+                                      averageDailyVolume10Day = dados.averageDailyVolume10Day,
+                                      longName = dados.longName
+                                  };
 
-            foreach (var ativo in updateAtivo)
-                await _repository.AtualizarAtivo(ativo);
-
+                foreach (var ativo in updateAtivo)
+                    await _repository.AtualizarAtivo(ativo);
+            }
+            
             List<DadosHistoricosAtivos> dadosHistoricos = new List<DadosHistoricosAtivos>();
             List<DadosHistoricosAtivos> dadosHistoricosInsert = new List<DadosHistoricosAtivos>();
 
@@ -69,21 +72,49 @@ namespace G6.Application.Services
                     dadosHistoricos.Add(dado);
                 }
 
-            foreach (var dados in dadosHistoricos)
+            if(interno)
             {
-                var dadoInsert = new DadosHistoricosAtivos()
+                foreach (var dados in dadosHistoricos)
                 {
-                    Date = dados.Date,
-                    Open = dados.Open,
-                    High = dados.High,
-                    Low = dados.Low,
-                    Close = dados.Close,
-                    AdjustedClose = dados.AdjustedClose,
-                    Volume = dados.Volume,
-                    AtivosId = ativoDB.Id
-                };
+                    DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(long.Parse(dados.Date));
+                    DateTime dateTime = dateTimeOffset.UtcDateTime;
 
-                dadosHistoricosInsert.Add(dadoInsert);
+                    if(dateTime.Day == DateTime.UtcNow.Day)
+                    {
+                        var dadoInsert = new DadosHistoricosAtivos()
+                        {
+                            Date = dados.Date,
+                            Open = dados.Open,
+                            High = dados.High,
+                            Low = dados.Low,
+                            Close = dados.Close,
+                            AdjustedClose = dados.AdjustedClose,
+                            Volume = dados.Volume,
+                            AtivosId = ativoDB.Id
+                        };
+
+                        dadosHistoricosInsert.Add(dadoInsert);
+                    }
+                }
+            }
+            else
+            {
+                foreach (var dados in dadosHistoricos)
+                {
+                    var dadoInsert = new DadosHistoricosAtivos()
+                    {
+                        Date = dados.Date,
+                        Open = dados.Open,
+                        High = dados.High,
+                        Low = dados.Low,
+                        Close = dados.Close,
+                        AdjustedClose = dados.AdjustedClose,
+                        Volume = dados.Volume,
+                        AtivosId = ativoDB.Id
+                    };
+
+                    dadosHistoricosInsert.Add(dadoInsert);
+                }
             }
 
             await _dadosHistoricosRepository.InsertDadosHistoricos(dadosHistoricosInsert);

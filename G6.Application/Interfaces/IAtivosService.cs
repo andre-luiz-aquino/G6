@@ -12,11 +12,9 @@ namespace G6.Application.Interfaces
     {
 
         
-        Task AtivoQuoteTickers(BrapiTickerRequestViewModel request);
+        Task AtivoQuoteTickers(BrapiTickerRequestViewModel request, bool interno);
         Task<IEnumerable<string>> AtivoQuoteList();
-
         Task AtualizarTodosAtivo(BrapiTickerRequestViewModelTodos requestVM);
-
         Task<ListaMelhoresAtivos> GetFuncaoMelhoresAtivos();
     }
 }

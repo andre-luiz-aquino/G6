@@ -158,7 +158,9 @@ namespace G6.Persistence.Repositories
             }
         }
 
-
-
+        public async Task<List<Ativos>> GetTodosAtivos()
+        {
+            return await _context.Ativos.ToListAsync();
+        }
     }
 }
