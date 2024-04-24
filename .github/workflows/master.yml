@@ -35,7 +35,6 @@ jobs:
           else
               echo ".NET Core SDK is installed."
           fi
-
   Build:
     runs-on: self-hosted
     needs: [ClonagemRepo, CheckDotnet]
