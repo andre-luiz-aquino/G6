@@ -14,7 +14,7 @@ namespace G6.Domain.Interfaces
         Task AtualizarTodosAtivo(Ativos ativos);
         Task<Ativos> GetAtivoByNome(string nome);
         Task<List<String>> GetAtivoCodigos();
-        Task<ListaMelhoresAtivos> GetFuncaoMelhoresAtivos();
+        Task<ListaMelhoresAtivos> GetFuncaoMelhoresAtivos(string nome);
         Task<List<Ativos>> GetTodosAtivos();
     }
 }

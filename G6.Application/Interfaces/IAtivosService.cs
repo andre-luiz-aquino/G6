@@ -15,6 +15,6 @@ namespace G6.Application.Interfaces
         Task AtivoQuoteTickers(BrapiTickerRequestViewModel request, bool interno);
         Task<IEnumerable<string>> AtivoQuoteList();
         Task AtualizarTodosAtivo(BrapiTickerRequestViewModelTodos requestVM);
-        Task<ListaMelhoresAtivos> GetFuncaoMelhoresAtivos();
+        Task<ListaMelhoresAtivos> GetFuncaoMelhoresAtivos(string nome);
     }
 }

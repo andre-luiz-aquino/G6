@@ -39,10 +39,10 @@ namespace G6.Api.Controllers
             await _ativosService.AtualizarTodosAtivo(request);
             return Ok();
         }
-        [HttpGet, Route("melhoresAtivos")]
-        public async Task<ActionResult<List<ListaMelhoresAtivos>>> BuscarMelhoresAtivos()
+        [HttpPost, Route("montar-carteira")]
+        public async Task<ActionResult<List<ListaMelhoresAtivos>>> BuscarMelhoresAtivos([FromBody] MontarCarteiraRequestViewModel request)
         {
-            var melhoresAtivos = await _ativosService.GetFuncaoMelhoresAtivos();
+            var melhoresAtivos = await _ativosService.GetFuncaoMelhoresAtivos(request.nomeCarteira);
             return Ok(melhoresAtivos);
         }
 

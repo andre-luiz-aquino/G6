@@ -210,9 +210,9 @@ namespace G6.Application.Services
 
         }
 
-        public async Task<ListaMelhoresAtivos> GetFuncaoMelhoresAtivos()
+        public async Task<ListaMelhoresAtivos> GetFuncaoMelhoresAtivos(string nome)
         {
-            var melhoresAtivos = await _repository.GetFuncaoMelhoresAtivos();
+            var melhoresAtivos = await _repository.GetFuncaoMelhoresAtivos(nome);
             
             if (melhoresAtivos is not null)
                 return melhoresAtivos;

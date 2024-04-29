@@ -128,7 +128,7 @@ namespace G6.Persistence.Repositories
             return codigos;
         }
 
-        public async Task<ListaMelhoresAtivos> GetFuncaoMelhoresAtivos()
+        public async Task<ListaMelhoresAtivos> GetFuncaoMelhoresAtivos(string nome)
         {
             // String de conexão
             var connectionString = _context.Database.GetConnectionString();
@@ -140,8 +140,10 @@ namespace G6.Persistence.Repositories
                 await conn.OpenAsync();
 
                 // Criar o comando
-                using (var cmd = new NpgsqlCommand("SELECT \"Ativos\".calcular_media_movel_top10();", conn))
+                using (var cmd = new NpgsqlCommand("SELECT \"Ativos\".calcular_media_movel_top10(@nomeCarteira);", conn))
                 {
+                    cmd.Parameters.AddWithValue("nomeCarteira", nome);
+
                     // Executar o comando e capturar o resultado
                     var result = await cmd.ExecuteScalarAsync();
 

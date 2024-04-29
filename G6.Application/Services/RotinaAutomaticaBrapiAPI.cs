@@ -1,4 +1,5 @@
-﻿using G6.Application.Interfaces;
+﻿
+using G6.Application.Interfaces;
 using G6.Application.ViewModels;
 using G6.Domain.Entities;
 using G6.Domain.Interfaces;
