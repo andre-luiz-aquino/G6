@@ -12,7 +12,6 @@ jobs:
         run: |
           echo "Runner connection successful."
           # Adicione aqui quaisquer verificações adicionais de conectividade que você deseja realizar
-          
 
   ClonagemRepo:
     runs-on: self-hosted
