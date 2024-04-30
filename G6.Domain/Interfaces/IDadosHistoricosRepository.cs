@@ -10,5 +10,6 @@ namespace G6.Domain.Interfaces
     public interface IDadosHistoricosRepository
     {
         Task InsertDadosHistoricos(List<DadosHistoricosAtivos> dadosHistoricos);
+        Task<List<DadosHistoricosAtivos>> GetHistoricoAtivo(string ativo); 
     }
 }

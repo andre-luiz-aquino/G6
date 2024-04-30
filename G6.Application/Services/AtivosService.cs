@@ -219,5 +219,17 @@ namespace G6.Application.Services
 
             return null;
         }
+
+
+        public async Task<List<DadosHistoricosAtivos>> GetHistoricoAtivo(string ativo)
+        {
+           
+            var historicoAtivo = await _dadosHistoricosRepository.GetHistoricoAtivo(ativo);
+
+           
+
+            return historicoAtivo;
+        }
+
     }
 }

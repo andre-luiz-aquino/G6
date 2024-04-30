@@ -16,5 +16,8 @@ namespace G6.Application.Mapping
             CreateMap<AtivosDTO, Ativos>();
             CreateMap<Ativos, AtivosDTO>();
         }
+
+
     }
+
 }

@@ -46,5 +46,11 @@ namespace G6.Api.Controllers
             return Ok(melhoresAtivos);
         }
 
+        [HttpGet, Route("BuscarHistoricoAtivos")]
+        public async Task<ActionResult<List<DadosHistoricosAtivos>>> GetHistoricoAtivo([FromQuery] String Ativo)
+        {
+            var historicoAtivo = await _ativosService.GetHistoricoAtivo(Ativo);
+            return Ok(historicoAtivo);
+        }
     }
 }
