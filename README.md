@@ -8,7 +8,8 @@ Obs.: Os projetos deverão ser congelados duas semanas antes do UCL Interdiscipl
 **
 ## Banco de Dados 
 
-![Pasted image 20240425080240](https://github.com/andre-luiz-aquino/G6/assets/103086746/365151cf-59f4-4191-820c-4fa2a98a0865)
+![image](https://github.com/andre-luiz-aquino/G6/assets/103086746/97da7083-0cf6-4eac-8507-5bc72ea1aab4)
+
 
 ### Descrição do banco de dados
 
@@ -59,7 +60,7 @@ Utilizamos GitHub Actions para automatizar nossos processos de integração cont
 - PM2
 ## Rotas da API 
 
-![Pasted image 20240425091832](https://github.com/andre-luiz-aquino/G6/assets/103086746/c52aeb69-9420-468f-8af1-9d543c165a29)
+![image](https://github.com/andre-luiz-aquino/G6/assets/103086746/5a947eb3-c0cb-490a-b817-abcb43e615c9)
 
 ## Entregas 
 ### Calendário de Entregas
