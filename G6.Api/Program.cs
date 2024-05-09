@@ -36,7 +36,18 @@ builder.Services.AddHostedService<RotinaAutomaticaBrapiAPI>();
 // Registro do AutoMapper
 builder.Services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
 
-
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        builder =>
+        {
+            builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .WithExposedHeaders("Content-Disposition")
+            .AllowAnyHeader();
+        });
+});
 
 var app = builder.Build();
 
@@ -47,6 +58,8 @@ var app = builder.Build();
 
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 
