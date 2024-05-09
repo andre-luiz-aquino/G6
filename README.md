@@ -60,7 +60,18 @@ Utilizamos GitHub Actions para automatizar nossos processos de integração cont
 - PM2
 ## Rotas da API 
 
-![image](https://github.com/andre-luiz-aquino/G6/assets/103086746/5a947eb3-c0cb-490a-b817-abcb43e615c9)
+![image](https://github.com/andre-luiz-aquino/G6/assets/103086746/39945186-ae2d-4b5a-a4f1-114a77483029)
+
+#Ativos# : Esta rota é responsável por atualizar informações de um ativo específico e inserir dados históricos associados a esse ativo em um banco de dados.
+
+#List# : A faz uma chamada à API do Brapi para obter uma lista das cotações de ações. Ele solicita os dados à API e os deserializa em um objeto AtivoStockList, em seguida, ordena os resultados pelo volume de ações e seleciona os 50 principais para inserção no banco de dados por meio de um repositório. Finalmente, ele retorna a lista de códigos de ativos obtidos.
+
+#Todos# : Essa rota executar uma função armazenada no banco de dados PostgreSQL que calcula a média móvel dos 10 melhores ativos com base no nome da carteira fornecido como parâmetro.
+
+#Montar Carteira# : A rota é usada para calcular duas carteiras diferentes: uma com peso fixo e outra com peso variável, usando o método de paridade de riscos para calcular os pesos das ações da carteira.
+
+#Buscar Historico Ativos# : A rota busca o historico de rendimento com base no ativo fornecido para rota.
+
 
 ## Entregas 
 ### Calendário de Entregas
