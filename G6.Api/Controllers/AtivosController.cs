@@ -46,5 +46,16 @@ namespace G6.Api.Controllers
             return Ok(melhoresAtivos);
         }
 
+        [HttpGet, Route("get-ativos")]
+        public async Task<ActionResult<List<ListaTop10Ativos>>> GetTop10Ativos()
+        {
+            var top10Ativos = await _ativosService.GetTop10Ativos();
+
+            if (top10Ativos is null)
+                return BadRequest();
+
+            return Ok(top10Ativos);
+        }
+
     }
 }

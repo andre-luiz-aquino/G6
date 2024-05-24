@@ -164,5 +164,35 @@ namespace G6.Persistence.Repositories
         {
             return await _context.Ativos.ToListAsync();
         }
+
+        public async Task<ListaTop10Ativos> GetTop10Ativos()
+        {
+            // String de conexão
+            var connectionString = _context.Database.GetConnectionString();
+
+            // Criar a conexão com o banco
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                // Abrir a conexão
+                await conn.OpenAsync();
+
+                // Criar o comando
+                using (var cmd = new NpgsqlCommand("SELECT \"Ativos\".get_top_10_ativos();", conn))
+                {
+                    // Executar o comando e capturar o resultado
+                    var result = await cmd.ExecuteScalarAsync();
+
+                    // Converter o resultado para string JSON
+                    string jsonResult = result.ToString();
+
+                    // Opcional: deserializar o JSON para uma lista de objetos ListaMelhoresAtivos
+
+                    var data = JsonConvert.DeserializeObject<ListaTop10Ativos>(jsonResult);
+
+                    // Retornar os dados deserializados
+                    return data;
+                }
+            }
+        }
     }
 }

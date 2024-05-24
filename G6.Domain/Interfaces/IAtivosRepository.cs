@@ -16,5 +16,6 @@ namespace G6.Domain.Interfaces
         Task<List<String>> GetAtivoCodigos();
         Task<ListaMelhoresAtivos> GetFuncaoMelhoresAtivos(string nome);
         Task<List<Ativos>> GetTodosAtivos();
+        Task<ListaTop10Ativos> GetTop10Ativos();
     }
 }

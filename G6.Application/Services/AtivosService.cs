@@ -204,10 +204,7 @@ namespace G6.Application.Services
                     dadosHistoricosInsert.Add(dadoInsert);
                 }
                 await _dadosHistoricosRepository.InsertDadosHistoricos(dadosHistoricosInsert);
-
             }
-
-
         }
 
         public async Task<ListaMelhoresAtivos> GetFuncaoMelhoresAtivos(string nome)
@@ -216,6 +213,16 @@ namespace G6.Application.Services
             
             if (melhoresAtivos is not null)
                 return melhoresAtivos;
+
+            return null;
+        }
+
+        public async Task<ListaTop10Ativos> GetTop10Ativos()
+        {
+            var top10Ativos = await _repository.GetTop10Ativos();
+
+            if (top10Ativos is not null)
+                return top10Ativos;
 
             return null;
         }
