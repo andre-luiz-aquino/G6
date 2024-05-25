@@ -238,5 +238,25 @@ namespace G6.Application.Services
 
             return null;
         }
+
+        public async Task<RetornoRelatorioAtivo> GetRelatorioAtivo(int ativoId, bool paridadeRiscos)
+        {
+            var relatorioAtivo = await _repository.GetRelatorioPorAtivo(ativoId, paridadeRiscos);
+
+            if (relatorioAtivo is not null)
+                return relatorioAtivo;
+
+            return null;
+        }
+
+        public async Task<RetornoRendimentoTotalCarteira> GetRendimentoTotalCarteira(bool paridadeRiscos)
+        {
+            var rendimentoTotalCarteira = await _repository.GetRendimentoTotalCarteira(paridadeRiscos);
+
+            if (rendimentoTotalCarteira is not null)
+                return rendimentoTotalCarteira;
+
+            return null;
+        }
     }
 }

@@ -17,5 +17,8 @@ namespace G6.Domain.Interfaces
         Task<ListaMelhoresAtivos> GetFuncaoMelhoresAtivos(string nome);
         Task<List<Ativos>> GetTodosAtivos();
         Task<ListaTop10Ativos> GetTop10Ativos();
+        Task<RetornoRelatorioAtivo> GetRelatorioPorAtivo(int ativoId, bool paridadeRiscos);
+        Task NormalizarDadosTabela();
+        Task<RetornoRendimentoTotalCarteira> GetRendimentoTotalCarteira(bool paridade);
     }
 }

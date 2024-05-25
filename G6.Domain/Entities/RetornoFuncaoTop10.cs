@@ -12,5 +12,6 @@ namespace G6.Domain.Entities
         public string longname { get; set; }
         public int ativoId { get; set; }
         public float valorAtivo { get; set; }
+        public string urlImagem { get; set; }
     }
 }

@@ -59,6 +59,12 @@ namespace G6.Application.Services
                             await _ativosService.AtivoQuoteTickers(item, true);
                         }
                     }
+
+                    using (var scope = _scopeFactory.CreateScope())
+                    {
+                        var _ativoRepositoryService = scope.ServiceProvider.GetRequiredService<IAtivosRepository>();
+                        await _ativoRepositoryService.NormalizarDadosTabela();
+                    }
                 }
                 await Task.Delay(TimeSpan.FromSeconds(3600));
             }

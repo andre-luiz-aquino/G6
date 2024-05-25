@@ -11,6 +11,6 @@ namespace G6.Domain.Entities
         public decimal mediamovel { get; set; }
         public string simbolo { get; set; }
         public string longname { get; set; }
-        public int ativosId { get; set; }
+        public int ativoId { get; set; }
     }
 }
