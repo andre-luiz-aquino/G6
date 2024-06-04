@@ -20,5 +20,6 @@ namespace G6.Application.Interfaces
         Task<RetornoRelatorioAtivo> GetRelatorioAtivo(int ativoId, bool paridadeRiscos);
         Task<ListaTop10Ativos> GetTop10Ativos();
         Task<RetornoRendimentoTotalCarteira> GetRendimentoTotalCarteira(bool paridadeRiscos);
+        Task<RetornoRelatorioTodosAtivos> GetRelatorioTodosAtivos(bool paridadeRiscos);
     }
 }

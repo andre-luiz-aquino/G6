@@ -279,5 +279,37 @@ namespace G6.Persistence.Repositories
                 }
             }
         }
+
+            public async Task<RetornoRelatorioTodosAtivos> GetRelatorioAllAtivos(bool paridade)
+            {
+                // String de conexão
+                var connectionString = _context.Database.GetConnectionString();
+
+                // Criar a conexão com o banco
+                using (var conn = new NpgsqlConnection(connectionString))
+                {
+                    // Abrir a conexão
+                    await conn.OpenAsync();
+
+                    // Criar o comando
+                    using (var cmd = new NpgsqlCommand("SELECT \"Ativos\".relatorio_todos_ativos(@paridadeRiscosFront);", conn))
+                    {
+                        cmd.Parameters.AddWithValue("paridadeRiscosFront", paridade);
+
+                        // Executar o comando e capturar o resultado
+                        var result = await cmd.ExecuteScalarAsync();
+
+                        // Converter o resultado para string JSON
+                        string jsonResult = result.ToString();
+
+                        // Opcional: deserializar o JSON para uma lista de objetos ListaMelhoresAtivos
+
+                        var data = JsonConvert.DeserializeObject<RetornoRelatorioTodosAtivos>(jsonResult);
+
+                        // Retornar os dados deserializados
+                        return data;
+                    }
+                }
+            }
     }
 }

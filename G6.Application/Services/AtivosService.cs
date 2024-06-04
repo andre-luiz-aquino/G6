@@ -223,8 +223,12 @@ namespace G6.Application.Services
            
             var historicoAtivo = await _dadosHistoricosRepository.GetHistoricoAtivo(ativo);
 
-           
-
+            foreach (var item in historicoAtivo)
+            {
+                DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(long.Parse(item.Date));
+                item.Date = dateTimeOffset.UtcDateTime.ToString("yyyy-MM-dd");
+            }
+               
             return historicoAtivo;
         }
 
@@ -243,6 +247,7 @@ namespace G6.Application.Services
         {
             var relatorioAtivo = await _repository.GetRelatorioPorAtivo(ativoId, paridadeRiscos);
 
+
             if (relatorioAtivo is not null)
                 return relatorioAtivo;
 
@@ -255,6 +260,16 @@ namespace G6.Application.Services
 
             if (rendimentoTotalCarteira is not null)
                 return rendimentoTotalCarteira;
+
+            return null;
+        }
+
+        public async Task<RetornoRelatorioTodosAtivos> GetRelatorioTodosAtivos(bool paridadeRiscos)
+        {
+            var relatorioTodosAtivos = await _repository.GetRelatorioAllAtivos(paridadeRiscos);
+
+            if (relatorioTodosAtivos is not null)
+                return relatorioTodosAtivos;
 
             return null;
         }

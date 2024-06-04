@@ -33,6 +33,7 @@ namespace G6.Persistence.Repositories
         {
             var historicoAtivo = await _context.DadosHistoricosAtivos
                 .Where(d => d.Ativos.Symbol == ativo)
+                .OrderByDescending(x => x.Id)
                 .ToListAsync();
 
             return historicoAtivo;

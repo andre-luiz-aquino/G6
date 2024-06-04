@@ -46,7 +46,7 @@ namespace G6.Api.Controllers
             return Ok(melhoresAtivos);
         }
 
-        [HttpGet, Route("BuscarHistoricoAtivos")]
+        [HttpGet, Route("buscar-historico-ativos")]
         public async Task<ActionResult<List<DadosHistoricosAtivos>>> GetHistoricoAtivo([FromQuery] string Ativo)
         {
             var historicoAtivo = await _ativosService.GetHistoricoAtivo(Ativo);
@@ -74,6 +74,17 @@ namespace G6.Api.Controllers
             return Ok(relatorioAtivo);
         }
 
+        [HttpGet("relatorio-todos-ativos")]
+        public async Task<ActionResult<List<RetornoRelatorioTodosAtivos>>> GetRelatorioTodosAtivos([FromQuery] bool paridadeRiscos)
+        {
+            var relatotoTodosAtivos = await _ativosService.GetRelatorioTodosAtivos(paridadeRiscos);
+
+            if (relatotoTodosAtivos is null)
+                return BadRequest();
+
+            return Ok(relatotoTodosAtivos);
+
+        }
         [HttpGet, Route("rendimento-total-carteira")]
         public async Task<ActionResult<List<RetornoRelatorioAtivo>>> GetRelatorioPorAtivo([FromQuery] bool paridadeRiscos)
         {
@@ -84,6 +95,5 @@ namespace G6.Api.Controllers
 
             return Ok(rendimentoTotal);
         }
-
     }
 }
