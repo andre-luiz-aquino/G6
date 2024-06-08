@@ -10,8 +10,6 @@ namespace G6.Application.Interfaces
 {
     public interface IAtivosService
     {
-
-        
         Task AtivoQuoteTickers(BrapiTickerRequestViewModel request, bool interno);
         Task<IEnumerable<string>> AtivoQuoteList();
         Task AtualizarTodosAtivo(BrapiTickerRequestViewModelTodos requestVM);
@@ -22,5 +20,6 @@ namespace G6.Application.Interfaces
         Task<RetornoRendimentoTotalCarteira> GetRendimentoTotalCarteira(bool paridadeRiscos);
         Task<RetornoRelatorioTodosAtivos> GetRelatorioTodosAtivos(bool paridadeRiscos);
         Task<RetornoRelatorioRetornoDiarioCarteira> GetRendimentoDiarioCarteira(bool paridadeRiscos);
+        Task<RetornoTelaInicial> GetContextoTelaInicial(bool paridadeRiscos);
     }
 }

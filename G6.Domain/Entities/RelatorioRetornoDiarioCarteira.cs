@@ -11,6 +11,5 @@ namespace G6.Domain.Entities
         public DateOnly dataHora {  get; set; }
         public int carteiraId { get; set; }
         public decimal rendimentoDiario { get; set; }
-
     }
 }

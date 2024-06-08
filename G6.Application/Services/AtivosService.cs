@@ -283,5 +283,15 @@ namespace G6.Application.Services
 
             return null;
         }
+
+        public async Task<RetornoTelaInicial> GetContextoTelaInicial(bool paridadeRiscos)
+        {
+            var retornoTelaInicial = await _repository.GetContextoTelaInicial(paridadeRiscos);
+
+            if (retornoTelaInicial is not null)
+                return retornoTelaInicial;
+
+            return null;
+        }
     }
 }

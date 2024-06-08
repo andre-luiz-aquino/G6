@@ -107,5 +107,16 @@ namespace G6.Api.Controllers
 
             return Ok(rendimentoDiario);
         }
+
+        [HttpGet("contexto-tela-inicial")]
+        public async Task<ActionResult<List<RetornoTelaInicial>>> GetContextoTelaInicial([FromQuery] bool paridadeRiscos)
+        {
+            var contextoTelaInicial = await _ativosService.GetContextoTelaInicial(paridadeRiscos);
+
+            if (contextoTelaInicial is null)
+                return BadRequest();
+
+            return Ok(contextoTelaInicial);
+        }
     }
 }

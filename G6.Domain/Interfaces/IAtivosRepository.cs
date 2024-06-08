@@ -22,5 +22,6 @@ namespace G6.Domain.Interfaces
         Task<RetornoRendimentoTotalCarteira> GetRendimentoTotalCarteira(bool paridade);
         Task<RetornoRelatorioTodosAtivos> GetRelatorioAllAtivos(bool paridadeRiscos);
         Task<RetornoRelatorioRetornoDiarioCarteira> GetRelatorioDiarioCarteira(bool paridadeRiscos);
+        Task<RetornoTelaInicial> GetContextoTelaInicial(bool paridadeRiscos);
     }
 }
