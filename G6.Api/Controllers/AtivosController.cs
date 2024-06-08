@@ -19,7 +19,7 @@ namespace G6.Api.Controllers
             _mapper = mapper;
         }
 
-        
+
         [HttpPost]
         public async Task<ActionResult> RequestQuoteTickersBrapi([FromQuery] BrapiTickerRequestViewModel request)
         {
@@ -85,6 +85,7 @@ namespace G6.Api.Controllers
             return Ok(relatotoTodosAtivos);
 
         }
+
         [HttpGet, Route("rendimento-total-carteira")]
         public async Task<ActionResult<List<RetornoRelatorioAtivo>>> GetRelatorioPorAtivo([FromQuery] bool paridadeRiscos)
         {
@@ -94,6 +95,17 @@ namespace G6.Api.Controllers
                 return BadRequest();
 
             return Ok(rendimentoTotal);
+        }
+
+        [HttpGet("rendimento-diario-carteira")]
+        public async Task<ActionResult<List<RetornoRelatorioRetornoDiarioCarteira>>> GetRelatorioDiario([FromQuery] bool paridadeRiscos)
+        {
+            var rendimentoDiario = await _ativosService.GetRendimentoDiarioCarteira(paridadeRiscos);
+
+            if (rendimentoDiario is null)
+                return BadRequest();
+
+            return Ok(rendimentoDiario);
         }
     }
 }

@@ -21,5 +21,6 @@ namespace G6.Domain.Interfaces
         Task NormalizarDadosTabela();
         Task<RetornoRendimentoTotalCarteira> GetRendimentoTotalCarteira(bool paridade);
         Task<RetornoRelatorioTodosAtivos> GetRelatorioAllAtivos(bool paridadeRiscos);
+        Task<RetornoRelatorioRetornoDiarioCarteira> GetRelatorioDiarioCarteira(bool paridadeRiscos);
     }
 }

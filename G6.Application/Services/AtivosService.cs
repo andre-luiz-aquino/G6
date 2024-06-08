@@ -273,5 +273,15 @@ namespace G6.Application.Services
 
             return null;
         }
+
+        public async Task<RetornoRelatorioRetornoDiarioCarteira> GetRendimentoDiarioCarteira(bool paridadeRiscos)
+        {
+            var relatorioRendimentoDiario = await _repository.GetRelatorioDiarioCarteira(paridadeRiscos);
+
+            if (relatorioRendimentoDiario is not null)
+                return relatorioRendimentoDiario;
+
+            return null;
+        }
     }
 }
