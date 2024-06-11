@@ -12,5 +12,6 @@ namespace G6.Domain.Entities
         public int ativoId { get; set; }
         public DateOnly dataHora { get; set; }
         public string urlImagem { get; set; }
+        public string symbol {  get; set; }
     }
 }
