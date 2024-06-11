@@ -53,9 +53,9 @@ namespace G6.Api.Controllers
             return Ok(historicoAtivo);
         }
         [HttpGet, Route("get-ativos")]
-        public async Task<ActionResult<List<ListaTop10Ativos>>> GetTop10Ativos()
+        public async Task<ActionResult<List<ListaTop10Ativos>>> GetTop10Ativos(bool paridadeRiscos)
         {
-            var top10Ativos = await _ativosService.GetTop10Ativos();
+            var top10Ativos = await _ativosService.GetTop10Ativos(paridadeRiscos);
 
             if (top10Ativos is null)
                 return BadRequest();

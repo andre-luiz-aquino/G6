@@ -233,9 +233,9 @@ namespace G6.Application.Services
         }
 
 
-        public async Task<ListaTop10Ativos> GetTop10Ativos()
+        public async Task<ListaTop10Ativos> GetTop10Ativos(bool paridadeRiscos)
         {
-            var top10Ativos = await _repository.GetTop10Ativos();
+            var top10Ativos = await _repository.GetTop10Ativos(paridadeRiscos);
 
             if (top10Ativos is not null)
                 return top10Ativos;

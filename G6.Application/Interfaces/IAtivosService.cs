@@ -16,7 +16,7 @@ namespace G6.Application.Interfaces
         Task<ListaMelhoresAtivos> GetFuncaoMelhoresAtivos(string nome);
         Task<List<DadosHistoricosAtivos>> GetHistoricoAtivo(string ativo);
         Task<RetornoRelatorioAtivo> GetRelatorioAtivo(int ativoId, bool paridadeRiscos);
-        Task<ListaTop10Ativos> GetTop10Ativos();
+        Task<ListaTop10Ativos> GetTop10Ativos(bool paridadeRiscos);
         Task<RetornoRendimentoTotalCarteira> GetRendimentoTotalCarteira(bool paridadeRiscos);
         Task<RetornoRelatorioTodosAtivos> GetRelatorioTodosAtivos(bool paridadeRiscos);
         Task<RetornoRelatorioRetornoDiarioCarteira> GetRendimentoDiarioCarteira(bool paridadeRiscos);

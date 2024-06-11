@@ -16,7 +16,7 @@ namespace G6.Domain.Interfaces
         Task<List<String>> GetAtivoCodigos();
         Task<ListaMelhoresAtivos> GetFuncaoMelhoresAtivos(string nome);
         Task<List<Ativos>> GetTodosAtivos();
-        Task<ListaTop10Ativos> GetTop10Ativos();
+        Task<ListaTop10Ativos> GetTop10Ativos(bool paridadeRiscos);
         Task<RetornoRelatorioAtivo> GetRelatorioPorAtivo(int ativoId, bool paridadeRiscos);
         Task NormalizarDadosTabela();
         Task<RetornoRendimentoTotalCarteira> GetRendimentoTotalCarteira(bool paridade);

@@ -165,7 +165,7 @@ namespace G6.Persistence.Repositories
             return await _context.Ativos.ToListAsync();
         }
 
-        public async Task<ListaTop10Ativos> GetTop10Ativos()
+        public async Task<ListaTop10Ativos> GetTop10Ativos(bool paridadeRiscos)
         {
             // String de conexão
             var connectionString = _context.Database.GetConnectionString();
@@ -177,8 +177,10 @@ namespace G6.Persistence.Repositories
                 await conn.OpenAsync();
 
                 // Criar o comando
-                using (var cmd = new NpgsqlCommand("SELECT \"Ativos\".get_top_10_ativos();", conn))
+                using (var cmd = new NpgsqlCommand("SELECT \"Ativos\".get_top_10_ativos(@paridadeRiscosFront);", conn))
                 {
+                    cmd.Parameters.AddWithValue("paridadeRiscosFront", paridadeRiscos);
+
                     // Executar o comando e capturar o resultado
                     var result = await cmd.ExecuteScalarAsync();
 
