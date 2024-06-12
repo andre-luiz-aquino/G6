@@ -229,7 +229,7 @@ namespace G6.Application.Services
                 item.Date = dateTimeOffset.UtcDateTime.ToString("yyyy-MM-dd");
             }
                
-            return historicoAtivo.OrderBy(x => x.Date);
+            return historicoAtivo.OrderBy(x => x.Date).ToList();
         }
 
 
