@@ -243,7 +243,7 @@ namespace G6.Application.Services
                     Console.WriteLine($"Formato de data inválido: {item.Date}");
                     return false;
                 }
-            }).ToList();
+            }).OrderBy(x => x.Date).ToList();
 
             return historicoAtivo;
         }
