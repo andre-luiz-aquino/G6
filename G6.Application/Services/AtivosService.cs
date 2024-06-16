@@ -228,7 +228,23 @@ namespace G6.Application.Services
                 DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(long.Parse(item.Date));
                 item.Date = dateTimeOffset.UtcDateTime.ToString("yyyy-MM-dd");
             }
-               
+
+            DateTime specifiedDate = new DateTime(2024, 06, 16);
+
+            historicoAtivo = historicoAtivo.Where(item =>
+            {
+                DateTime itemDate;
+                if (DateTime.TryParse(item.Date, out itemDate))
+                {
+                    return itemDate >= specifiedDate;
+                }
+                else
+                {
+                    Console.WriteLine($"Formato de data inválido: {item.Date}");
+                    return false;
+                }
+            }).ToList();
+
             return historicoAtivo;
         }
 
